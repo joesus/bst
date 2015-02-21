@@ -38,4 +38,10 @@ class BSTTest < MiniTest::Unit::TestCase
     assert_equal "1 3 4 6 8 10", @wikibst.insert(@node4).to_s
     assert_equal "1 3 4 6 8 10 20", @wikibst.insert(@node20).to_s
   end
+
+  def test_search
+    assert_equal 1, @wikibst.find(1).value
+    assert_equal 6, @wikibst.find(6).value
+    assert_equal nil, @wikibst.find(100)
+  end
 end

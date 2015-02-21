@@ -12,12 +12,18 @@ class BSTNode < ASTNode
     self
   end
 
-  def find(node)
-    # TODO - implement
+  def find(value)
+    if value < self.value
+      self.left.find(value) unless self.left.nil?
+    elsif value > self.value
+      self.right.find(value) unless self.right.nil?
+    else
+      self
+    end
   end
 
   def delete(node)
-    # TODO - implement
+
   end
 
 end
