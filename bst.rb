@@ -22,10 +22,27 @@ class BSTNode < ASTNode
     end
   end
 
-  def delete(node)
-
+  def delete(value)
+    node = find(value)
+    if node.leaf?
+      node.replace_self_with(nil) if node.leaf?
+    elsif node.left && node.right
+      successorValue = node.right.find_minimum.value
+      self.delete(successorValue)
+      node.value = successorValue
+    else
+      node.left.nil? ? node.replace_self_with(node.right) : node.replace_self_with(node.left)
+    end
+    self
   end
 
+  def find_minimum
+    self.left.nil? ? self : self.left.find_minimum
+  end
+
+  def replace_self_with(node)
+    self == self.parent.left ? self.parent.left = node : self.parent.right = node
+  end
 end
 
 
