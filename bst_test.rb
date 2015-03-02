@@ -19,6 +19,11 @@ class BSTTest < MiniTest::Unit::TestCase
                                                                 left: BSTNode.new(value: 4))),
                            right: BSTNode.new(value: 10,
                                               right: BSTNode.new(value: 14)))
+    @notabst = BSTNode.new(value: 20,
+                           left: BSTNode.new(value: 10),
+                           right: BSTNode.new(value: 30,
+                                              left: BSTNode.new(value: 5),
+                                              right: BSTNode.new(value: 40)))
   end
 
   def test_root
@@ -65,5 +70,18 @@ class BSTTest < MiniTest::Unit::TestCase
 
   def test_delete_two_children_node
     assert_equal "1 4 6 8 10 14", @wikibst.delete(3).to_s
+  end
+
+  def test_get_minimum
+    assert_equal "1", @wikibst.find_minimum.to_s
+  end
+
+  def test_get_maximum
+    assert_equal "14", @wikibst.find_maximum.to_s
+  end
+
+  def test_validate_bst
+    assert_equal true, @wikibst.valid_bst?
+    assert_equal false, @notabst.valid_bst?
   end
 end

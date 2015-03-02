@@ -36,6 +36,27 @@ class BSTNode < ASTNode
     self
   end
 
+  # a) if the node is the left child of its parent,
+  # then it must be smaller than (or equal to) the parent
+  # and it must pass down the value from its parent to its right subtree
+  # to make sure none of the nodes in that subtree is greater than the parent,
+  # and similarly b) if the node is the right child of its parent,
+  # then it must be larger than the parent and it must pass down the value from its parent
+  # to its left subtree to make sure none of the nodes in that subtree
+  # is lesser than the parent.
+  def valid_bst?
+    binding.pry
+    if !self.left.nil?
+      true if self.left.maximum > self.value
+    else
+      self.value if self.left.valid_bst? < self.value
+    end
+  end
+
+  def find_maximum
+    self.right.nil? ? self : self.right.find_maximum
+  end
+
   def find_minimum
     self.left.nil? ? self : self.left.find_minimum
   end
